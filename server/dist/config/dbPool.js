@@ -17,10 +17,11 @@ const pool = mysql2_1.default.createPool({
     queueLimit: 0
 });
 pool.getConnection((err) => {
+    var _a;
     if (err) {
         console.log('Error connecting to database: ', err);
         return;
     }
-    console.log(`Connected to database ${process.env.DB_NAME}`);
+    console.log(`Connected to database ${(_a = process.env.DB_NAME) === null || _a === void 0 ? void 0 : _a.toUpperCase()} on port ${process.env.DB_PORT}.`);
 });
 exports.default = pool;

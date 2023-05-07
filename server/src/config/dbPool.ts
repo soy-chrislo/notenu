@@ -19,7 +19,7 @@ pool.getConnection((err) => {
     console.log('Error connecting to database: ', err);
     return;
   }
-  console.log(`Connected to database ${process.env.DB_NAME}`);
+  console.log(`Connected to database ${process.env.DB_NAME?.toUpperCase()} on port ${process.env.DB_PORT}.`);
 });
 
 export default pool;
