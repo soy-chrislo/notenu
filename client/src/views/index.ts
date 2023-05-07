@@ -1,0 +1,5 @@
+export { default as DashboardView } from './DashboardView'
+export { default as LandingView } from './LandingView'
+export { default as LoginView } from './LoginView'
+export { default as RegisterView } from './RegisterView'
+export { default as NotFoundView } from './NotFoundView'

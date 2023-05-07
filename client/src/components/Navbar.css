@@ -1,0 +1,12 @@
+ul {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  color: black;
+  font-size: 1.3rem;
+  margin: 0 1rem;
+}
