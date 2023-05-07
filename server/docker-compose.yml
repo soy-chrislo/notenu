@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:latest
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+        "--default-authentication-plugin=mysql_native_password",
+      ]
+    restart: always
+    environment:
+      MYSQL_DATABASE: notenu
+      MYSQL_ROOT_PASSWORD: "12345"
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+    container_name: db
