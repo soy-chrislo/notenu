@@ -8,34 +8,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const dbPool_1 = __importDefault(require("../config/dbPool"));
-function query(sql) {
-    return new Promise((resolve, reject) => {
-        dbPool_1.default.query(sql, (err, rows) => {
-            if (err)
-                return reject(err);
-            resolve(rows);
-        });
-    });
-}
+const utils_1 = require("../utils");
+const { executeQuery } = utils_1.databaseUtils;
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        const { username, password } = req.body;
+        if (!username || !password) {
+            return res.status(400).json({
+                message: 'Username and password are required'
+            });
+        }
+        ;
+        const query = "SELECT * FROM users WHERE username = ? AND password = ?";
+        const params = [username, password];
         try {
-            const rows = yield query('SELECT NOW()');
-            const data = rows[0]["NOW()"];
-            res.json({
-                message: 'Login!',
-                data
+            const rows = yield executeQuery(query, params);
+            if (rows.length === 0) {
+                return res.status(401).json({
+                    message: 'Credentials are not valid'
+                });
+            }
+            const user = rows[0];
+            res.status(200).json({
+                message: 'Login success',
+                user: {
+                    id: user.id,
+                    username: user.username,
+                    roles: user.roles,
+                    permissions: user.permissions
+                }
             });
         }
         catch (err) {
             console.error(err);
             res.status(500).json({
-                message: 'Internal server error'
+                message: 'login error'
             });
         }
     });

@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const db_controller_1 = require("../controllers/db.controller");
+const router = (0, express_1.Router)();
+router.get("/", db_controller_1.getTables);
+router.get("/:name", db_controller_1.getTable);
+router.get('/roles/:id', db_controller_1.getRolesByUserId);
+router.get('/permissions/:id', db_controller_1.getPermissionsByUserId);
+exports.default = router;
