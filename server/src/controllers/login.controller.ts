@@ -50,7 +50,7 @@ async function login(req: Request, res: Response): Promise<Response<any, Record<
   try {
     const rows = await executeQuery<User>(query, params);
     if (rows.length === 0) {
-      return res.status(401).json({
+      return res.status(400).json({
         message: "Credentials are not valid",
       });
     }
