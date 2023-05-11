@@ -1,5 +1,5 @@
-import { RowDataPacket } from 'mysql2';
+import { type RowDataPacket } from "mysql2";
 
-export interface QueryResult extends RowDataPacket{
+export interface QueryResult extends RowDataPacket {
   // [key: string]: any;
 }

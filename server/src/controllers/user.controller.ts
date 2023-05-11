@@ -1,26 +1,27 @@
-import { Request, Response } from 'express';
+import { type Request, type Response } from "express";
 import userModel from "../models/user.model";
 
-async function getUsers(req: Request, res: Response){
+async function getUsers(req: Request, res: Response): Promise<void> {
   try {
     const result = await userModel.getUsers();
     res.json(result);
   } catch (err) {
-    console.error(err);
+    const error = err as Error;
     res.status(500).json({
-      message: 'Internal server error'
+      message: error.message,
     });
   }
 }
 
-async function getUserById(req: Request, res: Response){
+async function getUserById(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
     const result = await userModel.getUserById(id);
     res.json(result);
   } catch (err: any) {
+    const error = err as Error;
     res.status(500).json({
-      message: err?.message || 'Internal server error'
+      message: error.message,
     });
   }
 }
@@ -30,20 +31,21 @@ interface User {
   password: string;
 }
 
-async function createUser(req: Request, res: Response){
+async function createUser(req: Request, res: Response): Promise<void> {
   try {
     const { name, password } = req.body;
     const user: User = { name, password };
     const result = await userModel.createUser(user);
     res.json(result);
   } catch (err: any) {
+    const error = err as Error;
     res.status(500).json({
-      message: err?.message || 'Internal server error'
+      message: error.message,
     });
   }
 }
 
-async function updateUser(req: Request, res: Response){
+async function updateUser(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
     const { name, password } = req.body;
@@ -51,17 +53,16 @@ async function updateUser(req: Request, res: Response){
     const result = await userModel.updateUserById(id, user);
     res.json(result);
   } catch (err: any) {
+    const error = err as Error;
     res.status(500).json({
-      message: err?.message || 'Internal server error'
+      message: error.message,
     });
   }
 }
-
-
 
 export default {
   getUsers,
   getUserById,
   createUser,
-  updateUser
-}
+  updateUser,
+};

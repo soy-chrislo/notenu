@@ -1,5 +1,11 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from "express";
-import { getTables, getTable, getRolesByUserId, getPermissionsByUserId } from "../controllers/db.controller";
+import {
+  getTables,
+  getTable,
+  getRolesByUserId,
+  getPermissionsByUserId,
+} from "../controllers/db.controller";
 
 const router = Router();
 
@@ -7,9 +13,8 @@ router.get("/", getTables);
 
 router.get("/:name", getTable);
 
-router.get('/roles/:id', getRolesByUserId);
+router.get("/roles/:id", getRolesByUserId);
 
-router.get('/permissions/:id', getPermissionsByUserId);
-
+router.get("/permissions/:id", getPermissionsByUserId);
 
 export default router;

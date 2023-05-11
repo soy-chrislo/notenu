@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from "express";
 import { LoginController } from "../controllers";
 
-const router = Router()
+const { login, verifyToken } = LoginController;
 
-router.post('/', LoginController.login)
+const router = Router();
 
-export default router
+router.post("/", login);
+router.get("/verify", verifyToken);
+
+export default router;

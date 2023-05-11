@@ -1,7 +1,7 @@
-import { Express } from 'express';
-import listEndpoints from 'express-list-endpoints';
+import { type Express } from "express";
+import listEndpoints from "express-list-endpoints";
 
-export default function showEndpoints(app: Express) {
+export default function showEndpoints(app: Express): string[] {
   // const endpoints = app._router.stack
   //   .filter((r: any) => r.route)
   //   .map((r: any) => {
@@ -11,7 +11,8 @@ export default function showEndpoints(app: Express) {
   //     };
   //   });
 
-  const endpoints: String[] = listEndpoints(app).map((endpoint) => `${endpoint.methods} - ${endpoint.path}`);
-  console.log(endpoints);
+  const endpoints: string[] = listEndpoints(app).map(
+    (endpoint) => `${JSON.stringify(endpoint.methods)} ${endpoint.path}`
+  );
+  return endpoints;
 }
-

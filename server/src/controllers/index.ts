@@ -1,1 +1,1 @@
-export { default as LoginController } from './login.controller';
+export { default as LoginController } from "./login.controller";

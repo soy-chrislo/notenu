@@ -18,6 +18,9 @@ function Navbar() {
         <li>
           <Link to={'/dashboard'}>Dashboard</Link>
         </li>
+        <li>
+          <Link to={'/panel'}>Panel</Link>
+        </li>
       </ul>
     </>
   )
